@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from "../views/Login";
-import { Messages } from "../views/Message";
+import { Messages } from "../views/Messages";
 
 const RouterApp = () => {
   return (
