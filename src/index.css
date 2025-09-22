@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .app {
@@ -40,10 +41,18 @@
   border-bottom: 1px solud #ddd;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.chat-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .chat-header img {
-  width: 80px;
+  width: 30px;
 }
 
 .chat-actions {
@@ -64,10 +73,78 @@
   background-color: violet;
 }
 
-.chat-footer {
-  background-color: blue;
-}
 
 .chat-messages {
   flex: 1;
+  padding: 15px;
+  background-color: #fafafa;
+}
+
+.chat-footer {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  gap: 10px;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.chat-footer button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #077bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Login page */
+
+.login-main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #159f30, #00c6ff);
+  color: white;
+}
+
+.login-main img {
+  width: 80px;
+  margin-bottom: 15px;
+}
+
+.login-main h1 {
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+.login-main form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-main form label {
+  font-weight: bold;
+  font-size: 14px;
+  color: rgb(66, 66, 66);
+  text-align: center;
+}
+
+.login-main form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
 }
