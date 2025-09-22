@@ -148,3 +148,34 @@
   outline: none;
   font-size: 14px;
 }
+
+.login-main form input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+.login-main form button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+form p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.text-info {
+  margin-top: 10px;
+  font-size: 13px;
+
+}
