@@ -33,7 +33,7 @@ export default function Chat() {
         ))}
       </section>
 
-      <footer className="chat-input">
+      <footer className="chat-footer">
         <input type="text" placeholder="Enter text here..." />
         <button>➤</button>
       </footer>
