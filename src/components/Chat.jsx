@@ -24,15 +24,16 @@ export default function Chat() {
         </div>
       </header>
 
-
       <section className="chat-messages">
-
-        <div className="message">
-          <p></p>
-          <span className="time">{m.time}</span>
-        </div>
-
+        {[].map((m, i) => (
+          <div key={i} className={`message ${m.from}`}>
+            <p>{m.text}</p>
+            <span className="time">{m.time}</span>
+          </div>
+        ))}
       </section>
+
+
 
       <footer className="chat-footer">
         <input type="text" placeholder="Enter text here..." />
