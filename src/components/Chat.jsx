@@ -2,14 +2,25 @@ import { useState } from "react"
 
 export default function Chat() {
   const [msg, setMsg] = useState("")
-  const []
+  const [messages, setMessages] = useState([])
+
+  // manejador del cambio del input //
 
   const handleChange = (event) => {
     setMsg(event.target.value)
+
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    const newMessage = {
+      id: crypto.randomUUID(),
+      text: msg,
+      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    }
+
+    setMessages([...messages, newMessage])
 
     setMsg("")
   }
@@ -39,10 +50,12 @@ export default function Chat() {
       </header>
 
       <section className="chat-messages">
-        <div className="message">
-          <p></p>
-          <span className="time"></span>
-        </div>
+        {
+          messages.map((message) => <div className="message">
+            <p>{message.text}</p>
+            <span className="time">{message.time}</span>
+          </div>)
+        }
       </section>
 
 

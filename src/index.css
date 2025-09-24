@@ -117,12 +117,37 @@
   flex: 1;
   padding: 15px;
   background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
+.message {
+  background-color: rgb(200, 235, 253);
+  padding: 5px 10px;
+  border-radius: 8px;
+  align-self: flex-end;
+  max-width: 50%;
+}
+
+.message .time {
+  font-size: 9px;
+  display: block;
+  text-align: end;
+
+}
+
 
 .chat-footer {
   display: flex;
   padding: 10px;
   border-top: 1px solid #ddd;
+  gap: 10px;
+}
+
+.chat-footer form {
+  display: flex;
+  flex: 1;
   gap: 10px;
 }
 
