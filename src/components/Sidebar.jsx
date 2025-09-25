@@ -56,6 +56,9 @@ export default function Sidebar() {
         className="search"
         onChange={handleChange}
       />
+      {
+        usersToRender.length === 0 && <p className="search-result">No search found...</p>
+      }
       <ul className="user-list">
         {
           usersToRender.map(user => <li className="user">
