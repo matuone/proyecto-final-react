@@ -41,7 +41,6 @@ export default function Chat() {
 
 
         <div className="chat-actions">
-          <button title="Font"><span>A</span></button>
           <button title="Camera">📷</button>
           <button title="Gallery">🖼️</button>
           <button title="Settings">⚙️</button>
