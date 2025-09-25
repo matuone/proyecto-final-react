@@ -1,3 +1,6 @@
+import { useState } from "react"
+
+
 export default function Sidebar() {
 
   const users = [
@@ -35,14 +38,27 @@ export default function Sidebar() {
 
   ]
 
+  const [usersToRender, setUsersToRender] = useState(users)
+
+
+
+  const handleChange = (event) => {
+    const result = users.filter((user) => user.name.toLocaleLowerCase().includes(event.target.value.toLocaleLowerCase()))
+    setUsersToRender(result)
+  }
+
 
 
   return (
     <div className="sidebar">
-      <input type="text" placeholder="Search..." className="search" />
+      <input type="text"
+        placeholder="Search..."
+        className="search"
+        onChange={handleChange}
+      />
       <ul className="user-list">
         {
-          users.map(user => <li className="user">
+          usersToRender.map(user => <li className="user">
             <img className="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YreOWfDX3kK-QLAbAL4ufCPc84oI2MA8Xg&s" alt="" />
             <div>
 
