@@ -34,7 +34,11 @@ const ChatProvider = ({ children }) => {
           id: 2,
           text: "Estoy desde las 12 en el banco",
           time: "15:10"
-        }
+        }, {
+          id: 3,
+          text: "Estoy comprando empanadas, ahi las llevo :)",
+          time: "20:00"
+        },
       ]
     },
   ])

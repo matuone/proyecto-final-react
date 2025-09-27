@@ -63,7 +63,7 @@ export default function Chat() {
 
       <section className="chat-messages">
         {
-          messages.map((message) => <div className="message">
+          user.messages.map((message) => <div className="message">
             <p>{message.text}</p>
             <span className="time">{message.time}</span>
           </div>)
