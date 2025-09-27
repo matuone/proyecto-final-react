@@ -7,7 +7,7 @@ const Login = () => {
   const [message, setMessage] = useState()
   const [error, setError] = useState()
 
-  const [showPassword, setShowPassword] = useState()
+  const [showPassword, setShowPassword] = useState(false)
 
   const navigate = useNavigate()
 
