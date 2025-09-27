@@ -1,8 +1,19 @@
 import { useState } from "react"
+import { useChat } from "../context/ChatContext"
 
 export default function Chat() {
   const [msg, setMsg] = useState("")
   const [messages, setMessages] = useState([])
+
+  const { users, selectedUser } = useChat()
+
+  const user = users.find(u => u.id === selectedUser)
+
+  if (!user) {
+    return (
+      <p>No hay usuario seleccionado</p>
+    )
+  }
 
   // manejador del cambio del input //
 
@@ -25,6 +36,8 @@ export default function Chat() {
     setMsg("")
   }
 
+
+
   return (
     <div className="chat">
       <header className="chat-header">
@@ -34,9 +47,9 @@ export default function Chat() {
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YreOWfDX3kK-QLAbAL4ufCPc84ol2MA8Xg&s"
               alt="Aiden Chavez"
               className="chat-avatar" />
-            <strong>Aiden Chavez</strong>
+            <strong>{user.name}</strong>
+            {user.lastSeen !== "" && <span className="last-seen">Last seen: {user.lastSeen}</span>}
           </div>
-          <span className="last-seen"> Last seen: 2 hours ago</span>
         </div>
 
 
