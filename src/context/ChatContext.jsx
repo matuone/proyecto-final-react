@@ -41,6 +41,20 @@ const ChatProvider = ({ children }) => {
         },
       ]
     },
+    {
+      id: 3,
+      name: "Juan Roman Riquelme",
+      status: "online",
+      lastSeen: "",
+      messages: [
+        {
+          id: 1,
+          text: "Hola Roman, estas feli?",
+          time: "00:40"
+        }
+
+      ]
+    },
   ])
 
   return (
