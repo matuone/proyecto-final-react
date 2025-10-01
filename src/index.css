@@ -50,6 +50,14 @@
   border: 1px solid #eee;
 }
 
+.user-not-found {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .user:hover {
   background-color: #eee;
 }
