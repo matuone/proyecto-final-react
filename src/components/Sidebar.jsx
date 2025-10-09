@@ -4,18 +4,14 @@ import { useChat } from "../context/ChatContext";
 export default function Sidebar() {
   const { users, setSelectedUser } = useChat();
 
-  // 🔄 Arranca con users y se actualiza si users cambia
   const [usersToRender, setUsersToRender] = useState(users);
-  useEffect(() => {
-    setUsersToRender(users);
-  }, [users]);
+  useEffect(() => setUsersToRender(users), [users]);
 
   const handleChange = (event) => {
     const q = event.target.value.toLocaleLowerCase();
-    const result = users.filter((user) =>
-      user.name.toLocaleLowerCase().includes(q)
+    setUsersToRender(
+      users.filter((u) => u.name.toLocaleLowerCase().includes(q))
     );
-    setUsersToRender(result);
   };
 
   return (
@@ -32,7 +28,6 @@ export default function Sidebar() {
 
       <ul className="user-list">
         {usersToRender.map((user) => (
-          // ✅ agregamos key y manejador
           <li
             key={user.id}
             onClick={() => setSelectedUser(user.id)}

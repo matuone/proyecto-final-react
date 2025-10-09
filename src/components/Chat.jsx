@@ -3,28 +3,25 @@ import { useChat } from "../context/ChatContext";
 
 export default function Chat() {
   const [msg, setMsg] = useState("");
-
-  // 🧩 Traemos users y selectedUser del contexto
   const { users, selectedUser, setUsers } = useChat();
 
   const user = users.find((u) => u.id === selectedUser);
 
+
   if (!user) {
     return (
       <div className="user-not-found">
-        <p>No hay usuario seleccionado...</p>
+        <p>Debés seleccionar un usuario para comenzar.</p>
       </div>
     );
   }
 
-  const handleChange = (event) => {
-    setMsg(event.target.value);
-  };
+  const handleChange = (event) => setMsg(event.target.value);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const text = msg.trim();
-    if (!text) return; // ⛔ evitar mensajes vacíos
+    if (!text) return;
 
     const newMessage = {
       id: crypto.randomUUID(),
@@ -32,17 +29,13 @@ export default function Chat() {
       time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     };
 
-    // 🔧 IMPORTANTE: no mutar (no push). Creamos un nuevo array
-    // y actualizamos el usuario correspondiente de forma inmutable.
+
     setUsers((prev) =>
       prev.map((u) =>
-        u.id === user.id
-          ? { ...u, messages: [...u.messages, newMessage] }
-          : u
+        u.id === user.id ? { ...u, messages: [...u.messages, newMessage] } : u
       )
     );
 
-    // ✅ al cambiar users, el useEffect del contexto persiste en localStorage
     setMsg("");
   };
 

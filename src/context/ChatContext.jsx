@@ -1,11 +1,12 @@
+
+
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ChatContext = createContext();
 
 const LS_USERS_KEY = "chat_users_v1";
-const LS_SELECTED_KEY = "chat_selected_v1";
 
-// 🚀 Datos iniciales por si no hay nada en localStorage
+
 const seedUsers = [
   {
     id: 1,
@@ -35,26 +36,19 @@ const seedUsers = [
 ];
 
 const ChatProvider = ({ children }) => {
-  // 🧠 Leemos una sola vez desde localStorage (lazy initializer)
+
   const [users, setUsers] = useState(() => {
     const saved = localStorage.getItem(LS_USERS_KEY);
     return saved ? JSON.parse(saved) : seedUsers;
   });
 
-  const [selectedUser, setSelectedUser] = useState(() => {
-    const saved = localStorage.getItem(LS_SELECTED_KEY);
-    return saved ? JSON.parse(saved) : false;
-  });
 
-  // 💾 Cada cambio en users se persiste
+  const [selectedUser, setSelectedUser] = useState(null);
+
+
   useEffect(() => {
     localStorage.setItem(LS_USERS_KEY, JSON.stringify(users));
   }, [users]);
-
-  // 💾 (Opcional) persistimos también el seleccionado
-  useEffect(() => {
-    localStorage.setItem(LS_SELECTED_KEY, JSON.stringify(selectedUser));
-  }, [selectedUser]);
 
   return (
     <ChatContext.Provider
