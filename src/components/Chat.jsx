@@ -1,47 +1,50 @@
-import { useState } from "react"
-import { useChat } from "../context/ChatContext"
+import { useState } from "react";
+import { useChat } from "../context/ChatContext";
 
 export default function Chat() {
-  const [msg, setMsg] = useState("")
-  const [messages, setMessages] = useState([])
+  const [msg, setMsg] = useState("");
 
-  const { users, selectedUser } = useChat()
+  // 🧩 Traemos users y selectedUser del contexto
+  const { users, selectedUser, setUsers } = useChat();
 
-  const user = users.find(u => u.id === selectedUser)
+  const user = users.find((u) => u.id === selectedUser);
 
   if (!user) {
     return (
       <div className="user-not-found">
         <p>No hay usuario seleccionado...</p>
       </div>
-    )
+    );
   }
-
-  // manejador del cambio del input //
 
   const handleChange = (event) => {
-    setMsg(event.target.value)
-
-  }
+    setMsg(event.target.value);
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    const text = msg.trim();
+    if (!text) return; // ⛔ evitar mensajes vacíos
 
     const newMessage = {
       id: crypto.randomUUID(),
-      text: msg,
-      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-    }
+      text,
+      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    };
 
-    user.messages.push(newMessage)
+    // 🔧 IMPORTANTE: no mutar (no push). Creamos un nuevo array
+    // y actualizamos el usuario correspondiente de forma inmutable.
+    setUsers((prev) =>
+      prev.map((u) =>
+        u.id === user.id
+          ? { ...u, messages: [...u.messages, newMessage] }
+          : u
+      )
+    );
 
-    // sincronizar la lista de usuarios en la base de datos //
-    //localstorage//
-
-    setMsg("")
-  }
-
-
+    // ✅ al cambiar users, el useEffect del contexto persiste en localStorage
+    setMsg("");
+  };
 
   return (
     <div className="chat">
@@ -51,12 +54,14 @@ export default function Chat() {
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YreOWfDX3kK-QLAbAL4ufCPc84ol2MA8Xg&s"
               alt="Aiden Chavez"
-              className="chat-avatar" />
+              className="chat-avatar"
+            />
             <strong>{user.name}</strong>
-            {user.lastSeen !== "" && <span className="last-seen">Last seen: {user.lastSeen}</span>}
+            {user.lastSeen !== "" && (
+              <span className="last-seen">Last seen: {user.lastSeen}</span>
+            )}
           </div>
         </div>
-
 
         <div className="chat-actions">
           <button title="Camera">📷</button>
@@ -67,19 +72,18 @@ export default function Chat() {
       </header>
 
       <section className="chat-messages">
-        {
-          user.messages.map((message) => <div className="message">
+        {user.messages.map((message) => (
+          <div key={message.id} className="message">
             <p>{message.text}</p>
             <span className="time">{message.time}</span>
-          </div>)
-        }
+          </div>
+        ))}
       </section>
-
-
 
       <footer className="chat-footer">
         <form onSubmit={handleSubmit}>
-          <input type="text"
+          <input
+            type="text"
             placeholder="Enter text here..."
             onChange={handleChange}
             value={msg}
@@ -88,5 +92,5 @@ export default function Chat() {
         </form>
       </footer>
     </div>
-  )
+  );
 }
